@@ -1,0 +1,32 @@
+<div class="container col-xl-4 col-lg-6 col-md-8 col-sm-10 cont-log">
+  <form id="reg-formular" class="cl-log-form" action="/register" method="post">
+      <img src="../bilder/mm.png" alt="MM" id="mm">
+      <div class="form-group">
+        <label for="email" class="label-text">Email:</label>
+        <input type="email" class="form-control border__style reg-nutzer-falsch" aria-describedby="emailHelp" name="email" autofocus>
+        <!--pattern="/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/" required-->
+        <small id="emailHelp" class="form-text text-muted">Bitte geben Sie ihre Email Adresse ein.</small>
+      </div>
+      <div class="form-group">
+        <label for="exampleInputPassword1" class="label-text">Passwort:</label >
+        <input type="password" class="form-control border__style reg-pass-falsch-1" id="reg-pass-1" name="pwd">
+        <small id="emailHelp" class="form-text text-muted">Passwort, minimum 8 Zeichen lang.</small>
+      </div>
+      <div class="form-group">
+        <label for="exampleInputPassword1" class="label-text">Passwort:</label >
+        <input type="password" class="form-control border__style reg-pass-falsch-2" id="reg-pass-2" name="pwdCopy">
+        <small id="emailHelp" class="form-text text-muted">Passwort bestätigung.</small>
+      </div>
+
+      {{#if errorValidationRegister}}
+        <h6 class="register_error">
+          Ihre Benutzername oder Passwort sind falsch!
+        </h6>
+      {{/if}}
+      <button type="submit" class="btn btn-primary btn-lg btn-block butt-speichern" id="button-register">Registrieren</button>
+      <div class="form-group form-check reg-div">
+        <a href="/login" id="a-reg"><span class="reg-tag">Zurück zum Login</span></a>
+        <div class="fehler-div" style="color:red"></div>
+      </div>
+  </form>
+</div>

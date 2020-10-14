@@ -1,0 +1,38 @@
+
+<div class="container col-xl-4 col-lg-6 col-md-6 col-sm-10 cont-log" >
+  <form id="login-formular" class="cl-log-form" action="/login" method="post">
+    <img src="../bilder/mm.png" alt="MM" id="mm">
+    <div class="form-group">
+      <label for="email" class="label-text">Email:</label>
+      <input type="email" class="form-control border__style login-nutzer-falsch" id="input-benutzername" aria-describedby="emailHelp" name="email" autofocus>
+      <!--pattern="/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/" required-->
+      <small id="emailHelp" class="form-text text-muted">Bitte geben Sie ihre Email adresse ein.</small>
+    </div>
+    <div class="form-group pass-div">
+      <label for="exampleInputPassword1" class="label-text">Passwort:</label>
+      <input type="password" class="form-control border__style login-pass-falsch" id="input-passwort" name="pwd">
+      <small id="emailHelp" class="form-text text-muted">Bitte geben Sie ihre Passwort ein.</small>
+    </div>
+
+    {{{body}}}
+      {{#if errorValidationLogin}}
+        <h6 class="register_error">
+          Login fehlgeschlagen!
+        </h6>
+      {{/if}}
+      {{#if deleteSuccessReport}}
+        <h6 class="register_error">
+          Konto wurde erfolgreich gelöscht!
+        </h6>
+      {{/if}}
+    <button type="submit" class="btn btn-primary btn-lg btn-block butt-speichern" id="button-login">Einlogen</button>
+    <div class="form-group form-check reg-div">
+        <a href="/register" id="a-reg" method="get"><span class="reg-tag">Für Registrierung hier klicken!</span></a>
+        <div class="fehler-div" style="color:red"></div>
+    </div>
+    <div class="form-group form-check reg-div">
+      <a href="/forgetpass" method="get"><span class="reg-tag">Passwort vergessen!</span></a>
+      <div class="fehler-div" style="color:red"></div>
+    </div>
+  </form>
+</div>

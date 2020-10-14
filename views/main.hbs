@@ -1,0 +1,455 @@
+
+<main>
+    <div class="container cont-main">
+        <!--ROW (1) -->
+        <div class="row firstrow">
+
+            <div class="col-8">
+                <button type="button" class="btn add-new-data-button" data-toggle="modal" data-target="#exampleModalLong">
+                    Neu +
+                </button>
+                
+                <!-- Modal 1 RECHNER-->
+                <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h3 class="modal-title modal-style-title" id="exampleModalLongTitle">
+                                    Money Memory
+                                </h3>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form id ="main-formular" class="cl-log-form" action="/calc" method="post">
+                                    <!-- -->
+                                    <div class="col-md2 mb-3 alle-felder">
+                                        <label for="select" class="label-text">Rechnung</label>
+                                        <select class="custom-select" name="rechnung" required>
+                                            <!--<option selected disabled value="">...</option>-->
+                                            <option class="option-text" value="ein" selected>Einnahmen</option>
+                                            <option class="option-text" value="aus">Ausgaben</option>
+                                        </select>
+                                        <div class="invalid-tooltip">
+                                            Bitte suchen Sie sich ein Feld aus.
+                                        </div>
+                                    </div>
+                                    <div class="alle-felder">
+                                        <label for="select" class="label-text">Ust/Vst:</label>
+                                        <select class="custom-select" name="mwst" required>
+                                            <!--<option selected disabled value="">...</option>-->
+                                            <option class="option-text" value="0" selected>0 %</option>
+                                            <option class="option-text" value="5">5 %</option>
+                                            <option class="option-text" value="10">10 %</option>
+                                            <option class="option-text" value="20">20 %</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6 mb-3 alle-felder" >
+                                        <label for="date" class="label-text">Datum:</label>
+                                        <input type="date" class="form-control form-control" id="table_date" name="datum" required>
+                                    </div>
+                                    <div class="col-md-6 mb-3 alle-felder">
+                                        <label for="type" class="label-text">Beschreibung:</label>
+                                        <input type="text" class="form-control form-control" name="beschreibung" maxlength="16" placeholder="Max 12 Zeichen" required>
+                                    </div>
+                                    <div class="col-md-3 mb-3 alle-felder">
+                                        <label for="type" class="label-text">Euro:</label>
+                                        <input type="number" class="form-control form-control" name="euro" required step=".01" placeholder="Betrag in Euro">
+                                        <div class="invalid-tooltip">
+                                            Bitte geben Sie eine Zahl ein.
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn btn-primary btn-lg btn-block butt-submit-feld" id="button-save">Speichern</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modal 2 JAHRESABRECHUNG-->
+                <div class="modal hide fade" id="exampleModal-year" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Geben Sie das Jahr ein, um die Jahresabrechnung herunterzuladen.</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <form action="/getfile" method="post">
+                                <div class="modal-body">
+                                    <!-- -->
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" name="jahr" min="2000" max="2500" placeholder="Für die Jahresabrechnung" value="2020" required>
+                                    </div>     
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Abbrechen</button>
+                                    
+                                    <button type="submit" class="btn btn-primary" id="download_jahr">Herunterladen</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modal 3 MONATSABRECHUNG-->
+                <div class="modal hide fade" id="exampleModal-month" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Geben Sie das Monat ein, um die Monatsabrechnung herunterzuladen.</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <form action="/getfile" method="post">
+                                <div class="modal-body">
+                                    <div class="input-group">
+                                       <input type="number" class="form-control" name="formonat" min="1" max="12" placeholder="Für die Monatsabrechnung" required>
+                                    </div> 
+                                    <div class="input-group">
+                                       <input type="number" class="form-control" name="forjahr" min="2000" max="2500" placeholder="Für die Monatsabrechnung" value="2020" required>
+                                    </div>                                
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Abbrechen</button>
+                                    
+                                    <button type="submit" class="btn btn-primary" id="download_monat">Herunterladen</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal 4 INFO-->
+
+            <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-scrollable">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">Money Memory</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        Einnahmen und Ausgaben Rechner, mit Money Memory behalten Sie ihre Finanzen in überblick. Fügen Sie einfach ihre Einträge ein und sie werden chronologisch auf zwei getrennte Tabellen angezeigt. In die erste Tabelle weden Ihre Einnahmen hinzugefügt, und in die andere die Ausgaben. Sie bekommen den einkalkulierten Gesamtstand, sowie der Einnahmen, Ausgaben, Ust und Vst. 
+                        Sie können Ihre Einträge jederzeit auf eine Excel Datei Herunterladen oder einen Jahres oder Monats Eintrag löschen. 
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Schließen</button>
+                    </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal 5 KONTO-->
+            <div class="modal fade" id="staticBackdrop-konto" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">Konto verwalten</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="/changepass" method="get">
+                            <button class="dropdown-item"><span class="dropdown-style-inside-btns">Passwort ändern</span></button>
+                        </form>
+                        <!--
+                        <form action="/userdelete" method="post">
+                            <button class="dropdown-item"><span class="dropdown-style-inside-btns">Konto löschen</span></button>
+                        </form>
+                        -->
+                        <button type="button" class="dropdown-item" data-toggle="modal" data-target="#confirm_modal_del_konto">
+                            <span class="dropdown-style-inside-btns">Konto löschen</span>
+                        </button>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Abbrechen</button>
+                    </div>
+                    </div>
+                </div>
+            </div>
+            <!--MODAL CONFIRM DELETE ACCOUNT-->
+            <div class="modal fade" id="confirm_modal_del_konto" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <h2>Sind Sie sicher?</h2>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Abbrechen</button>
+                            <form action="/userdelete" method="post">
+                                <button type="submit" class="dropdown-item">
+                                    <span class="dropdown-style-inside-btns">Konto löschen</span>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Modal 6 ABMELDEN-->
+            <div class="modal fade" id="exampleModal-abmelden" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Für Abmeldung auf "Ja", und "Nein" zum Abbrechen!</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="/logout" method="get">
+                            <button class="dropdown-item"><span class="dropdown-style-inside-btns">Ja, abmelden</span></button>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Nein, abbrechen</button>
+                    </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-2">
+                <!--
+                <button type="button" class="btn add-new-data-button" data-toggle="modal" data-target="#delete_selected_type">
+                    Löschen -
+                </button>
+                -->
+                <!-- Modal DELETE -->
+                <div class="modal fade" id="delete_selected_type" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel"></h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            
+                            <form action="/yearmonth" method="post">
+                                <div class="modal-body">
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" name="delmonat" min="1" max="12" placeholder="Monat">
+                                    </div> 
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" name="deljahr" min="2000" max="2500" placeholder="Jahr" required>
+                                    </div>                                
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Abbrechen</button>
+                                    
+                                    <button type="submit" class="btn btn-primary">Löschen</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <!--DROPDOWN OPTIONEN-->
+            <div class="col-2 dropdown">
+                <button class="btn btn-secondary dropdown-toggle dropdown-style-button" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    {{currentuser}}
+                </button>
+                <div class="dropdown-menu dropdown-style-menu" aria-labelledby="dropdownMenuButton">
+                    <button type="button" class="dropdown-item" data-toggle="modal" data-target="#staticBackdrop">
+                        <span class="dropdown-style-inside-btns">Info</span>
+                    </button>
+
+                    <form action="/getfile" method="get">
+                        <button type="submit" class="dropdown-item">
+                            <span class="dropdown-style-inside-btns">Gesamtabrechnung</span>
+                        </button>
+                    </form>
+
+                    <button type="button" class="dropdown-item" data-toggle="modal" data-target="#exampleModal-year">
+                        <span class="dropdown-style-inside-btns">Jahresabrechung</span>
+                    </button>
+                    <button type="button" class="dropdown-item" data-toggle="modal" data-target="#exampleModal-month">
+                        <span class="dropdown-style-inside-btns">Monatsabrechnung</span>
+                    </button>
+                    <button type="button" class="dropdown-item" data-toggle="modal" data-target="#delete_selected_type"> 
+                        <span class="dropdown-style-inside-btns">Löschen</span>
+                    </button>
+                    <button type="button" class="dropdown-item" data-toggle="modal" data-target="#staticBackdrop-konto">
+                        <span class="dropdown-style-inside-btns">Konto</span>
+                    </button>
+
+                    <!-- Button trigger modal -->
+                    <button type="button" class="dropdown-item" data-toggle="modal" data-target="#exampleModal-abmelden"><span class="dropdown-style-inside-btns">Abmelden</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!--ROW 2 -->
+        <!--MODAL CONFIRM DIALOG-->
+            <div class="modal fade" id="confirm_modal_" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <h2>Sind Sie sicher?</h2>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Abbrechen</button>
+                            <a type="button" class="btn btn-primary to_select_">Löschen</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <!--ROW 3-->
+        <div class="row thirdrow">
+            <div class="col">
+                <div class="output-div">
+                    <p class="stand__">
+                        <b>Stand:</b>
+                        <span class="{{plusminus}}" id="print_total">{{totalAmount}}</span>
+                        <b class="stand_euro_size">€</b>
+                    </p>
+                </div>
+            </div>
+        </div>
+        {{#if errorValidationDelete}}
+            <h6 class="register_error">
+                Konto konnte nicht gelöscht werden!
+            </h6>
+        {{/if}}
+        {{#if datenError}}
+            <h6 class="register_error">
+                Daten konnten nicht geladen werden!
+            </h6>
+        {{/if}}
+        {{#if dataErrorMessage}}
+            <h6 class="register_error">
+                Daten konnten nicht gelöscht werden!
+            </h6>
+        {{/if}}
+        <!--ROW 4-->
+        <div class="row fourthrow">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-6 tabelle-einnahmen">    
+                <div class="total-felder">
+                    <p class="p_total_ein">
+                        <b>Einnahmen:</b>
+                        <b class="font_ein_color" id="print_ein"> {{alleEin}}</b> 
+                        <b class="font__color euro_size">€</b>
+                    </p>
+                </div>
+                <div class="total-felder">
+                    <div class="p_tax_ein">
+                        <b class="font__color">Ust:</b> 
+                        <i id="print_taxein"> {{taxEin}} </i>
+                        <b class="font__color euro_size"> €</b>
+                    </div>
+                </div>
+                <table class="table table-striped ">
+                    <thead class="thead-dark">
+                        <!--<th scope="col">Id</th>-->
+                        <th scope="col">Datum</th>
+                        <th scope="col">Rechnung</th>
+                        <th scope="col">Ust</th>
+                        <th scope="col">Ust</th>
+                        <th scope="col">Betrag</th> 
+                        <!--<th scope="col">#</th>-->                         
+                        <th scope="col" class="td_delete_icon">X</th>
+                    </thead>
+                    <tbody class="all_tables">
+                        {{#each tableContentEin}}
+                            
+                            <tr class="row_color_{{this.monat}}">
+                                <!--<th scope="row">{{this.nummer}}</th>-->
+                                <!--<td>{{this.id}}</td>-->
+                                <td style="color:#0e4d92;font-weight:bold"> {{this.datum}}</td>
+                                <td class="td_style_einnahmen">{{this.beschreibung}}</td>
+                                <td class="td_style__">{{this.mwst}}<i class="euro_percent">%</i></td>
+                                <td class="td_style__">{{this.taxamount}}<i class="euro_percent">€</i></td>
+                                <td class="td_style_euro_ein">{{this.euro}}<i class="euro_percent">€</i></td>
+                                <td class="td_delete_icon">
+                                    <a href="/contentdelete/{{this.id}}" role="button" class="btn btn-outline delete_row_btns" method="get"  data-toggle="modal" data-target="#confirm_modal_">
+                                        <img src="bilder/korb-1.png" alt="" style="width:25px;height:25px">
+                                    </a>
+                                </td>
+                            </tr>
+                            <!-- data-toggle="modal" data-target="#exampleModal-delete-content" -->
+                        {{/each}}
+                    </tbody>
+                </table>
+
+            </div>
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-6 tabelle-ausgaben">
+                <div class="total-felder">
+                    <p class="p_total_aus">
+                        <b>Ausgaben:</b>
+                        <b class="font_aus_color" id="print_aus"> {{alleAus}}</b> 
+                        <b class="font__color euro_size"> €</b></p>
+                </div>
+                <div class="total-felder">
+                    <div class="p_tax_ein">
+                        <b class="font__color">Vst:</b> 
+                        <i id="print_taxaus"> {{taxAus}} </i>
+                        <b class="font__color euro_size">€</b>
+                    </div>
+                </div>
+                <table class="table table-striped">
+                    <!-- class="all_tables aus_table"-->
+                    <thead class="thead-dark">
+                        <!--<th scope="col">Id</th>-->
+                        <th scope="col">Datum</th>
+                        <th scope="col">Rechnung</th>
+                        <th scope="col">Vst</th>
+                        <th scope="col">Vst</th>
+                        <th scope="col">Betrag</th>                     
+                        <th scope="col" class="td_delete_icon">X</th>
+                    </thead>
+                    <tbody class="all_tables">
+                        {{#each tableContentAus}}
+                            
+                            <tr class="row_color_{{this.monat}}"> 
+                                <!--<th scope="row">1</th>-->
+                                <!--<td>{{this.id}}</td>-->
+                                <td style="color:#0e4d92;font-weight:bold">{{this.datum}}</td>
+                                <td class="td_style_ausgaben">{{this.beschreibung}}</td>
+                                <td class="td_style__">{{this.mwst}}<i class="euro_percent">%</i></td>
+                                <td class="td_style__">{{this.taxamount}}<i class="euro_percent">€</i></td>
+                                <td class="td_style_euro_aus">{{this.euro}}<i class="euro_percent">€</i></td>                              
+                                <td class="td_delete_icon">
+                                    <a href="/contentdelete/{{this.id}}" role="button" class="btn btn-outline delete_row_btns" method="get" data-toggle="modal" data-target="#confirm_modal_">
+                                        <img src="bilder/korb-1.png" alt="" style="width:25px;height:25px">
+                                    </a>
+                                </td>
+                            </tr>
+                            <!-- data-toggle="modal" data-target="#exampleModal-delete-content"-->
+                        {{/each}} 
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!--ROW 5-->
+        <div class="row fifthrow">
+            <Footer class="navbar fixed-bottom footer__style">
+                <i>Made by: Blerim Hasani</i>
+                <a href="impressum.html">Impressum</a>
+            </Footer>
+        </div>
+    </div>
+</main>
